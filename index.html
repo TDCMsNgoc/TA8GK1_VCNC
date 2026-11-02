@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tiếng Anh 8 - Bài Tập Viết Lại Câu Giữa Kỳ 1 (Câu 41 - 80)</title>
+  <meta name="description" content="Luyện tập 40 câu viết lại câu Tiếng Anh lớp 8 giữa học kỳ 1 có bấm giờ 20 phút, tự động nộp bài và giải thích chi tiết ngữ pháp." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
+</head>
+<body>
+
+  <!-- Thanh điều hướng cố định trên cùng (Sticky Header) -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <div class="brand-section">
+        <span class="brand-badge">TA8 • GK1</span>
+        <span class="brand-title">Viết Lại Câu (Câu 41 - 80)</span>
+      </div>
+
+      <div class="nav-center">
+        <!-- Đồng hồ đếm ngược 20 phút -->
+        <div class="timer-box" id="timerBox" title="Thời gian làm bài còn lại">
+          <span>⏱️</span>
+          <span id="timerDisplay">20:00</span>
+        </div>
+
+        <div class="nav-stats">
+          <span>Đã làm:</span>
+          <span class="stat-pill"><span id="answeredCount">0</span>/40</span>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <button type="button" class="btn btn-outline btn-icon" id="soundToggleBtn" title="Bật/Tắt âm thanh">
+          🔔 Bật
+        </button>
+        <button type="button" class="btn btn-outline btn-icon" id="themeToggleBtn" title="Đổi giao diện sáng/tối">
+          🌙 Tối
+        </button>
+        <button type="button" class="btn btn-success" id="submitBtn">
+          <span>✓</span> Nộp bài
+        </button>
+      </div>
+    </div>
+    
+    <!-- Thanh tiến độ -->
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </header>
+
+  <!-- Phần giới thiệu đầu trang -->
+  <section class="hero-header">
+    <div class="hero-content">
+      <div class="hero-subtitle">Bộ Đề Kiểm Tra & Ôn Luyện Nâng Cao</div>
+      <h1 class="hero-title">40 CÂU VIẾT LẠI CÂU TIẾNG ANH 8 - GIỮA HỌC KỲ 1</h1>
+      <p class="hero-desc">
+        Rèn luyện kỹ năng biến đổi câu giữ nguyên nghĩa với đầy đủ các cấu trúc trọng tâm: <em>Spend / Take, Prefer / Would rather, So sánh hơn / không bằng, Mệnh đề mục đích (so that, in order to), Mệnh đề nguyên nhân (because / so) & liên từ nhượng bộ (although / however)</em>.
+      </p>
+
+      <div class="hero-tags">
+        <span class="badge">⏱️ Thời gian: 20 phút</span>
+        <span class="badge">📊 40 câu hỏi</span>
+        <span class="badge">🤖 Chấm điểm tự động</span>
+        <span class="badge">💡 Giải thích ngữ pháp chi tiết</span>
+        <span class="badge">🌐 Tương thích GitHub Pages</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Khu vực ứng dụng chính -->
+  <main class="app-container">
+    
+    <!-- Cột trái: Bảng kết quả + Danh sách 40 câu hỏi -->
+    <section class="main-content">
+      
+      <!-- Banner kết quả (ẩn khi đang làm, hiện sau khi nộp) -->
+      <div class="result-banner" id="resultBanner"></div>
+
+      <!-- Danh sách câu hỏi render từ questions.js -->
+      <div class="questions-list" id="questionsContainer"></div>
+    </section>
+
+    <!-- Cột phải: Bảng số câu + Thao tác nhanh (Sticky Sidebar) -->
+    <aside class="app-sidebar">
+      
+      <!-- Bảng câu hỏi -->
+      <div class="sidebar-card">
+        <div class="sidebar-title">
+          <span>Danh sách câu hỏi</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: normal;">40 câu</span>
+        </div>
+
+        <div class="palette-grid" id="paletteContainer"></div>
+
+        <div class="palette-legend">
+          <div class="legend-item">
+            <span class="legend-dot empty"></span>
+            <span>Chưa làm</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot filled"></span>
+            <span>Đã làm</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot pass"></span>
+            <span>Đúng</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot fail"></span>
+            <span>Sai</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tiện ích thao tác -->
+      <div class="sidebar-card">
+        <div class="sidebar-title">Tiện ích hỗ trợ</div>
+        <div class="quick-actions">
+          <button type="button" class="btn btn-outline" id="printBtn" style="width: 100%;">
+            🖨️ In đề / Xuất PDF
+          </button>
+          <button type="button" class="btn btn-outline" id="resetBtn" style="width: 100%; color: var(--danger);">
+            🔄 Làm lại từ đầu
+          </button>
+        </div>
+      </div>
+
+      <!-- Hướng dẫn làm bài -->
+      <div class="sidebar-card" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+        <strong style="color: var(--text-main); display: block; margin-bottom: 6px;">💡 Lưu ý khi làm bài:</strong>
+        <p>• Bạn có thể gõ chỉ phần còn lại của câu hoặc toàn bộ câu viết lại.</p>
+        <p style="margin-top: 4px;">• Sau 20 phút, hệ thống sẽ tự động nộp bài và mở toàn bộ đáp án kèm giải thích ngữ pháp.</p>
+        <p style="margin-top: 4px;">• Tiến trình làm bài được tự động lưu ngay cả khi bạn tải lại trang.</p>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <!-- Modal xác nhận nộp bài -->
+  <div class="modal-overlay" id="submitConfirmModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Xác nhận nộp bài thi</h3>
+      </div>
+      <div class="modal-body" id="modalMessage">
+        <!-- Nội dung sẽ được cập nhật động -->
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" id="cancelSubmitBtn">Tiếp tục làm bài</button>
+        <button type="button" class="btn btn-primary" id="confirmSubmitBtn">Xác nhận nộp bài</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chân trang -->
+  <footer class="site-footer">
+    <p>© Tiếng Anh Lớp 8 - Giữa Kỳ 1 | Đề thi viết lại câu trực tuyến</p>
+    <p style="font-size: 0.8rem; margin-top: 4px; color: var(--text-light);">
+      Tối ưu hóa chạy trực tiếp trên GitHub Pages, máy tính và thiết bị di động.
+    </p>
+  </footer>
+
+  <!-- Tải dữ liệu câu hỏi và logic ứng dụng -->
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
